@@ -17,7 +17,7 @@
   // Función para realizar la búsqueda
   async function fetchEscultores(query = "", criterio = "promedio", orden = "DESC") {
     try {
-      const res = await axios.get(`http://localhost:3001/api/escultores`, {
+      const res = await axios.get(`http://testeo-deploy-virid.vercel.app/api/escultores`, {
         params: {
           search: query,
           sortBy: criterio,
