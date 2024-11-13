@@ -8,23 +8,34 @@ import jwt from 'jsonwebtoken';
 
 // Clave secreta para firmar el token (debería ser almacenada de forma segura, como en variables de entorno)
 const JWT_SECRET = 'mi_clave_secreta'; // Cambir por algo más seguro
-const app = express();
-const port = 3001;
+
 let esculturas = [];
 let eventos = [];
 let artistas = [];
 let usuario = '';
 
-const http = require("http");
+const express = require('express');
+const path = require('path');
+const app = express();
 
-const server = http.createServer((req, res) =>{
-  res.writeHead(200, {"Content-Type": "text/plain"});
-  res.end("Hello world!")
+// Servir archivos estáticos generados por el frontend
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Cualquier otra ruta debería devolver el index.html del frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+  console.log(`Backend corriendo en el puerto ${port}`);
+});
 
-server.listen(PORT, () => console.log("Server is running on port 3001"))
+
+
+
+
+const apiUrl = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? 'https://testeo-deploy-nuevo.vercel.app' : 'http://localhost:3001');
 
 app.use(cors()); // Permitir CORS
 // Middleware para analizar el cuerpo de la solicitud (JSON)
