@@ -18,6 +18,21 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+const express = require('express');
+
+// Ruta para obtener los escultores
+app.get('/api/escultores', (req, res) => {
+  // Lógica para obtener escultores
+  res.json([{ escultorName: "Artista 1", escultorFoto: "url", contactoEmail: "email@dominio.com" }]);
+});
+
+// Iniciar el servidor
+app.listen(3001, () => {
+  console.log('Servidor corriendo en el puerto 3001');
+});
+
+
+
 // Servir archivos estáticos generados por el frontend
 app.use(express.static(path.join(__dirname, '../client/build')));
 
