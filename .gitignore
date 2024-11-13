@@ -483,3 +483,4 @@ tags
 ##Svelte
 qodana.yaml
 .idea
+.vercel
